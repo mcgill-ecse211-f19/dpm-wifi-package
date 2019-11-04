@@ -1,8 +1,8 @@
 package ca.mcgill.ecse211.project;
 
+import ca.mcgill.ecse211.wificlient.WifiConnection;
 import java.math.BigDecimal;
 import java.util.Map;
-import ca.mcgill.ecse211.wificlient.WifiConnection;
 
 /**
  * Integrate this carefully with your existing Resources class. The order in which things are
@@ -70,121 +70,44 @@ public class Resources {
   public static int greenCorner = get("GreenCorner");
 
   /**
-   * Red Zone, lower left hand corner, x value.
+   * The Red Zone.
    */
-  public static int red_ll_x = get("Red_LL_x");
+  public static Region red = new Region("Red_LL_x", "Red_LL_y", "Red_UR_x", "Red_UR_y");
 
   /**
-   * Red Zone, lower left hand corner, y value.
+   * The Green Zone.
    */
-  public static int red_ll_y = get("Red_LL_y");
+  public static Region green = new Region("Green_LL_x", "Green_LL_y", "Green_UR_x", "Green_UR_y");
 
   /**
-   * Red Zone, upper right hand corner, x value.
+   * The Island.
    */
-  public static int red_ur_x = get("Red_UR_x");
+  public static Region island =
+      new Region("Island_LL_x", "Island_LL_y", "Island_UR_x", "Island_UR_y");
 
   /**
-   * Red Zone, upper right hand corner, y value.
+   * The red tunnel footprint.
    */
-  public static int red_ur_y = get("Red_UR_y");
+  public static Region tnr = new Region("TNR_LL_x", "TNR_LL_y", "TNR_UR_x", "TNR_UR_y");
 
   /**
-   * Green Zone, lower left hand corner, x value.
+   * The green tunnel footprint.
    */
-  public static int green_ll_x = get("Green_LL_x");
+  public static Region tng = new Region("TNG_LL_x", "TNG_LL_y", "TNG_UR_x", "TNG_UR_y");
 
   /**
-   * Green Zone, lower left hand corner, y value.
+   * The location of the target bin.
    */
-  public static int green_ll_y = get("Green_LL_y");
-
-  /**
-   * Green Zone, upper right hand corner, x value.
-   */
-  public static int green_ur_x = get("Green_UR_x");
-
-  /**
-   * Green Zone, upper right hand corner, y value.
-   */
-  public static int green_ur_y = get("Green_UR_y");
-
-  /**
-   * The Island, lower left hand corner, x value.
-   */
-  public static int island_ll_x = get("Island_LL_x");
-
-  /**
-   * The Island, lower left hand corner, y value.
-   */
-  public static int island_ll_y = get("Island_LL_y");
-
-  /**
-   * The Island, upper right hand corner, x value.
-   */
-  public static int island_ur_x = get("Island_UR_x");
-
-  /**
-   * The Island, upper right hand corner, y value.
-   */
-  public static int island_ur_y = get("Island_UR_y");
-
-  /**
-   * The red tunnel footprint, lower left hand corner, x value.
-   */
-  public static int tnr_ll_x = get("TNR_LL_x");
-
-  /**
-   * The red tunnel footprint, lower left hand corner, y value.
-   */
-  public static int tnr_ll_y = get("TNR_LL_y");
-
-  /**
-   * The red tunnel footprint, upper right hand corner, x value.
-   */
-  public static int tnr_ur_x = get("TNR_UR_x");
-
-  /**
-   * The red tunnel footprint, upper right hand corner, y value.
-   */
-  public static int tnr_ur_y = get("TNR_UR_y");
-
-  /**
-   * The green tunnel footprint, lower left hand corner, x value.
-   */
-  public static int tng_ll_x = get("TNG_LL_x");
-
-  /**
-   * The green tunnel footprint, lower left hand corner, y value.
-   */
-  public static int tng_ll_y = get("TNG_LL_y");
-
-  /**
-   * The green tunnel footprint, upper right hand corner, x value.
-   */
-  public static int tng_ur_x = get("TNG_UR_x");
-
-  /**
-   * The green tunnel footprint, upper right hand corner, y value.
-   */
-  public static int tng_ur_y = get("TNG_UR_y");
-
-  /**
-   * The location of the target bin, x value.
-   */
-  public static int bin_x = get("BIN_x");
-
-  /**
-   * The location of the target bin, y value.
-   */
-  public static int bin_y = get("BIN_y");
+  public static Point bin = new Point(get("BIN_x"), get("BIN_y"));
   
   /**
    * Receives Wi-Fi parameters from the server program.
    */
   public static void receiveWifiParameters() {
     // Only initialize the parameters if needed
-    if (!RECEIVE_WIFI_PARAMS || wifiParameters != null) return;
+    if (!RECEIVE_WIFI_PARAMS || wifiParameters != null) {
+      return;
+    }
     System.out.println("Waiting to receive Wi-Fi parameters.");
 
     // Connect to server and get the data, catching any errors that might occur
@@ -210,7 +133,7 @@ public class Resources {
   /**
    * Returns the Wi-Fi parameter int value associated with the given key.
    * 
-   * @param key
+   * @param key the Wi-Fi parameter key
    * @return the Wi-Fi parameter int value associated with the given key
    */
   public static int get(String key) {
@@ -219,6 +142,94 @@ public class Resources {
     } else {
       return 0;
     }
+  }
+  
+  /**
+   * Represents a region on the competition map grid, delimited by its lower-left and upper-right
+   * corners (inclusive).
+   * 
+   * @author Younes Boubekeur
+   */
+  public static class Region {
+    /** The lower left corner of the region. */
+    public Point ll;
+    
+    /** The upper right corner of the region. */
+    public Point ur;
+    
+    /**
+     * Constructs a Region.
+     * 
+     * @param lowerLeft the lower left corner of the region
+     * @param upperRight the upper right corner of the region
+     */
+    public Region(Point lowerLeft, Point upperRight) {
+      validateCoordinates(lowerLeft, upperRight);
+      ll = lowerLeft;
+      ur = upperRight;
+    }
+    
+    /**
+     * Helper constructor to make a Region directly from parameter names.
+     * 
+     * @param llX
+     *     the Wi-Fi parameter key representing the lower left corner of the region x coordinate
+     * @param llY
+     *     the Wi-Fi parameter key representing the lower left corner of the region y coordinate
+     * @param urX 
+     *     the Wi-Fi parameter key representing the upper right corner of the region x coordinate
+     * @param urY
+     *     the Wi-Fi parameter key representing the upper right corner of the region y coordinate
+     */
+    public Region(String llX, String llY, String urX, String urY) {
+      this(new Point(get(llX), get(llY)), new Point(get(urX), get(urY)));
+    }
+    
+    /**
+     * Validates coordinates.
+     * 
+     * @param lowerLeft the lower left corner of the region
+     * @param upperRight the upper right corner of the region
+     */
+    private void validateCoordinates(Point lowerLeft, Point upperRight) {
+      if (lowerLeft.x > upperRight.x || lowerLeft.y > upperRight.y) {
+        throw new IllegalArgumentException(
+            "Upper right cannot be below or to the left of lower left!");
+      }
+    }
+    
+    public String toString() {
+      return "[" + ll + ", " + ur + "]";
+    }
+  }
+  
+  /**
+   * Represents a coordinate point on the competition map grid.
+   * 
+   * @author Younes Boubekeur
+   */
+  public static class Point {
+    /** The x coordinate. */
+    public double x;
+    
+    /** The y coordinate. */
+    public double y;
+    
+    /**
+     * Constructs a Point.
+     * 
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    public Point(double x, double y) {
+      this.x = x;
+      this.y = y;
+    }
+    
+    public String toString() {
+      return "(" + x + ", " + y + ")";
+    }
+    
   }
   
 }
