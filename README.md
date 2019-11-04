@@ -36,7 +36,7 @@ project, which provides an example of how to use the parameters obtained over Wi
 2. Set `Resources.SERVER_IP` to the IP address of your computer (**not** the EV3 IP address).
 You can find your IP address by running `hostname -I` on Linux, or from the network properties GUI of your OS. It should be in the form "192.168.x.y". Also set `Resources.TEAM_NUMBER` now so you don't forget.
 
-3. Run the `ClientExample` project as an EV3 program. Ensure that you observe output that resembles this:
+3. Run the `ClientExample` project as an EV3 program. Then click `Start` in the Server GUI after seeing your team is connected. Ensure that you observe output that resembles this:
 
     ```
     Running...
