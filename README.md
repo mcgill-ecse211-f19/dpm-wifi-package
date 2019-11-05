@@ -15,7 +15,7 @@ The server receives and responds to requests from a client, in exactly the same 
 computer is a client that connects to servers running websites. In this case, your robot is the client and you can test with the server on your laptop. In the beta demo and final competition, the
 TA/professor will run the server and they will decide what data to send to your robot.
 
-To run the server, double-click the JAR file, or run it from the command line (`./EV3WifiServer.jar`).
+To run the server, double-click the JAR file, or run it from the command line (`./EV3WifiServer.jar` or `java -jar EV3WifiServer.jar`).
 
 You can populate the parameters manually, from an XML file, or by copying parameters from the [Competition Map website](https://mcgill-dpm.github.io/Utilities/wifi/competition-map).
 
@@ -31,7 +31,7 @@ project, which provides an example of how to use the parameters obtained over Wi
 0. Connect to the DPM Wi-Fi
 ([Instructions](https://mcgill-ecse211-f19.github.io/getting_started_guide/GettingStarted-F19-updated#running-code-on-the-brick)).
 
-1. Open the server and populate its parameters. You can use the included `example_data_fill.xml`. Don't click `Start` yet.
+1. Open the server and populate its parameters. You can use the included `example_data_fill.xml` in the `Server/` folder. Don't click `Start` yet.
 
 2. Fix project setup issues, if needed. Skip this step if the project icon has no red markings (:heavy_exclamation_mark: or :x:).
 
@@ -60,7 +60,13 @@ You can find your IP address by running `hostname -I` on Linux, or from the netw
 
 ## Integrating with your code
 
-Add `EV3WiFiClient.jar` to `lib/` and the new material in `Resources` to your existing file. Add `EV3WiFiClient.jar` to your Java Build Path by right-clicking the project and selecting `Build Path` > `Configure Build Path` > `Libraries` > `Add JARs` and selecting it from the file picker.
+Add `EV3WiFiClient.jar` to `lib/` and point your Java Build Path to it by right-clicking the project and selecting `Build Path` > `Configure Build Path` > `Libraries` > `Add JARs` and selecting it from the file picker.
+
+Add all the items you declared in your `Resources` class to the one we provide here, at the location specified by this code comment:
+
+```java
+// DECLARE YOUR CURRENT RESOURCES HERE
+```
 
 If you do not want the robot to wait for Wi-Fi parameters (eg, if you're testing something else), set `RECEIVE_WIFI_PARAMS` to `false`.
 
