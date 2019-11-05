@@ -31,12 +31,16 @@ project, which provides an example of how to use the parameters obtained over Wi
 0. Connect to the DPM Wi-Fi
 ([Instructions](https://mcgill-ecse211-f19.github.io/getting_started_guide/GettingStarted-F19-updated#running-code-on-the-brick)).
 
-1. Run the server and populate its parameters.
+1. Open the server and populate its parameters. You can use the included `example_data_fill.xml`. Don't click `Start` yet.
 
-2. Set `Resources.SERVER_IP` to the IP address of your computer (**not** the EV3 IP address).
+2. Fix project setup issues, if needed. Skip this step if the project icon has no red markings (:heavy_exclamation_mark: or :x:).
+
+    Sometimes Eclipse does not locate the correct JRE (Java Runtime Enviroment) needed to run the project. To fix this, right-click the project and select `Build Path` > `Configure Build Path` > `Libraries`, then remove the unbound JRE (the one with :x:), then select `Add Library` > `JRE System Library`, and select the JRE that you used in the labs.
+
+3. Set `Resources.SERVER_IP` to the IP address of your computer (**not** the EV3 IP address).
 You can find your IP address by running `hostname -I` on Linux, or from the network properties GUI of your OS. It should be in the form "192.168.x.y". Also set `Resources.TEAM_NUMBER` now so you don't forget.
 
-3. Run the `ClientExample` project as an EV3 program. Then click `Start` in the Server GUI after seeing your team is connected. Ensure that you observe output that resembles this in the EV3 Console or on its screen:
+4. Run the `ClientExample` project as an EV3 program. Then click `Start` in the Server GUI after seeing your team is connected. Ensure that you observe output that resembles this in the EV3 Console or on its screen:
 
     ```
     Running...
@@ -56,7 +60,8 @@ You can find your IP address by running `hostname -I` on Linux, or from the netw
 
 ## Integrating with your code
 
-Add `EV3WiFiClient.jar` to `lib/` and the new material in `Resources` to your existing file.
+Add `EV3WiFiClient.jar` to `lib/` and the new material in `Resources` to your existing file. Add `EV3WiFiClient.jar` to your Java Build Path by right-clicking the project and selecting `Build Path` > `Configure Build Path` > `Libraries` > `Add JARs` and selecting it from the file picker.
+
 If you do not want the robot to wait for Wi-Fi parameters (eg, if you're testing something else), set `RECEIVE_WIFI_PARAMS` to `false`.
 
 ## Important points

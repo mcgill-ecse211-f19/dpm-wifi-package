@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 /**
- * Integrate this carefully with your existing Resources class. The order in which things are
- * declared matters!
+ * Integrate this carefully with your existing Resources class (See below for where to add your
+ * code from your current Resources file). The order in which things are declared matters!
+ * 
+ * When you're done, replace this javadoc comment with the one you have from your Resources class.
  * 
  * @author Younes Boubekeur
  */
@@ -22,7 +24,7 @@ public class Resources {
    * The IP address of the server that transmits data to the robot. Set this to the default for the
    * beta demo and competition.
    */
-  public static final String SERVER_IP = "192.168.0.101";
+  public static final String SERVER_IP = "192.168.2.23";
   
   /**
    * Your team number.
@@ -38,6 +40,10 @@ public class Resources {
    * Enable this to attempt to receive Wi-Fi parameters at the start of the program.
    */
   public static final boolean RECEIVE_WIFI_PARAMS = true;
+  
+  // DECLARE YOUR CURRENT RESOURCES HERE
+  // eg, motors, sensors, constants, etc
+  //////////////////////////////////////
   
   /**
    * Container for the Wi-Fi parameters.
