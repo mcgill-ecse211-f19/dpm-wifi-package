@@ -16,6 +16,7 @@ computer is a client that connects to servers running websites. In this case, yo
 TA/professor will run the server and they will decide what data to send to your robot.
 
 To run the server, double-click the JAR file, or run it from the command line (`./EV3WifiServer.jar` or `java -jar EV3WifiServer.jar`).
+If you're running Windows, select `Allow Access` at the firewall security prompt.
 
 You can populate the parameters manually, from an XML file, or by copying parameters from the [Competition Map website](https://mcgill-dpm.github.io/Utilities/wifi/competition-map).
 
