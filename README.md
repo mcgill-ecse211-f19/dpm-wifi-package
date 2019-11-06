@@ -2,6 +2,8 @@
 
 ### Fall 2019
 
+**Note:** The latest version of this document can always be found at [github.com/mcgill-ecse211-f19/dpm-wifi-package/blob/master/README.md](https://github.com/mcgill-ecse211-f19/dpm-wifi-package/blob/master/README.md).
+
 ## Overview
 
 As mentioned in the project document, there are a lot of parameters that your robot must
@@ -15,8 +17,8 @@ The server receives and responds to requests from a client, in exactly the same 
 computer is a client that connects to servers running websites. In this case, your robot is the client and you can test with the server on your laptop. In the beta demo and final competition, the
 TA/professor will run the server and they will decide what data to send to your robot.
 
-To run the server, double-click the JAR file, or run it from the command line (`./EV3WifiServer.jar` or `java -jar EV3WifiServer.jar`).
-If you're running Windows, select `Allow Access` at the firewall security prompt.
+To run the server, double-click the JAR file in your file explorer, or run it from the command line (`./EV3WifiServer.jar` or `java -jar EV3WifiServer.jar`).
+If you're running Windows, select `Allow Access` if you get firewall security prompt.
 
 You can populate the parameters manually, from an XML file, or by copying parameters from the [Competition Map website](https://mcgill-dpm.github.io/Utilities/wifi/competition-map).
 
@@ -34,7 +36,9 @@ project, which provides an example of how to use the parameters obtained over Wi
 
 1. Open the server and populate its parameters. You can use the included `example_data_fill.xml` in the `Server/` folder. Don't click `Start` yet.
 
-2. Fix project setup issues, if needed. Skip this step if the project icon has no red markings (:heavy_exclamation_mark: or :x:).
+2. Import the `ClientExample` folder as an existing Eclipse project. 
+
+    Fix project setup issues, if you see red markings (:heavy_exclamation_mark: or :x:). If you don't see them, go to step 3.
 
     Sometimes Eclipse does not locate the correct JRE (Java Runtime Enviroment) needed to run the project. To fix this, right-click the project and select `Build Path` > `Configure Build Path` > `Libraries`, then remove the unbound JRE (the one with :x:), then select `Add Library` > `JRE System Library`, and select the JRE that you used in the labs.
 
