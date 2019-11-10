@@ -75,6 +75,36 @@ Add all the items you declared in your `Resources` class to the one we provide h
 
 If you do not want the robot to wait for Wi-Fi parameters (eg, if you're testing something else), set `RECEIVE_WIFI_PARAMS` to `false`.
 
+Note that if you follow the simplified example we provide, you do not need to create separate variables for each Wi-Fi parameter described
+in the project documents, since we already create variables for you in the sample `Resources` class. You can access them using dot notation.
+
+For example:
+
+- For `Green_UR_x`, use `green.ur.x`.
+- For `TNR_LL_x`, use `tnr.ll.x`.
+
+To see all regions, refer to the `Resources` class or use Ctrl-space in Eclipse for code completion suggestions.
+
+Feel free to improve the simple `Region` static class to include logic that helps you calculate its length, width,
+or area if you think that would be useful. 
+
+To do that, add instance methods to `Region` like this:
+
+```java
+public static class Region {
+  // ...
+
+  public double length() {
+    // use ur and ll to calculate and return the length
+  }
+}
+```
+
+It is a good idea to test these methods using JUnit.
+
+
+
+
 ## Important points
 
 - You **must** use the most recent version of the client and server. We will notify you of major updates.
