@@ -67,6 +67,12 @@ You can find your IP address by running `hostname -I` on Linux, or from the netw
 
 Add `EV3WiFiClient.jar` to `lib/` and point your Java Build Path to it by right-clicking the project and selecting `Build Path` > `Configure Build Path` > `Libraries` > `Add JARs` and selecting it from the file picker.
 
+To avoid build errors in Travis CI, add this line in `build.gradle`, in the `dependencies` section:
+
+```groovy
+implementation files('lib/EV3WiFiClient.jar')
+```
+
 Add all the items you declared in your `Resources` class to the one we provide here, at the location specified by this code comment:
 
 ```java
@@ -117,6 +123,18 @@ As a result, your code must be able to handle **any** valid input as specified i
 account for all possiblities described by the project specification.
 - The very first thing your robot should do is connect to the server and download
 the parameters. Your robot should only start moving **after** having received data.
+- If you are using the Wi-Fi example we provided, the provided code is tailored to the competition and will throw an exception when 
+given invalid input, but since we are using the red tunnel coordinate value as the target angle for the beta demo,
+you can bypass this by changing this line (in `Resources`):
+  ```java
+  public static Region tnr = new Region("TNR_LL_x", "TNR_LL_y", "TNR_UR_x", "TNR_UR_y");
+  ```
+  to this:
+  ```java
+  //public static Region tnr = new Region("TNR_LL_x", "TNR_LL_y", "TNR_UR_x", "TNR_UR_y");
+  public static double targetAngle = Math.max(get("TNR_LL_x"), get("TNR_UR_x"));
+  ```
+  Do this only for the beta demo, and remember to change it back afterwards. 
 
 ## Useful Information
 - The WiFi test code uses `System.out.println()` statements that print to both the screen
