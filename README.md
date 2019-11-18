@@ -4,6 +4,9 @@
 
 **Note:** The latest version of this document can always be found at [github.com/mcgill-ecse211-f19/dpm-wifi-package/blob/master/README.md](https://github.com/mcgill-ecse211-f19/dpm-wifi-package/blob/master/README.md).
 
+**Update Nov. 18:** To be consistent with the project specification,
+the `bin` parameter has been replaced with `redBin` and `greenBin` parameters. See [below](#useful-information) for details.
+
 ## Overview
 
 As mentioned in the project document, there are a lot of parameters that your robot must
@@ -60,7 +63,7 @@ You can find your IP address by running `hostname -I` on Linux, or from the netw
     Green Zone: [(4.0, 0.0), (12.0, 5.0)]
     Island Zone, upper right: (15.0, 9.0)
     Red tunnel footprint, lower left y value: 7.0
-    Bin location X >= 5
+    Red bin location X >= 5
     ```
 
 ## Integrating with your code
@@ -109,8 +112,6 @@ public static class Region {
 It is a good idea to test these methods using JUnit.
 
 
-
-
 ## Important points
 
 - You **must** use the most recent version of the client and server. We will notify you of major updates.
@@ -134,7 +135,29 @@ you can bypass this by changing this line (in `Resources`):
   //public static Region tnr = new Region("TNR_LL_x", "TNR_LL_y", "TNR_UR_x", "TNR_UR_y");
   public static double targetAngle = Math.max(get("TNR_LL_x"), get("TNR_UR_x"));
   ```
-  Do this only for the beta demo, and remember to change it back afterwards. 
+  Do this only for the beta demo, and remember to change it back afterwards.
+- For the final competition, you should change your code to receive
+`redBin` and `greenBin` parameters instead of `bin`. To do that:
+  1. Update the Wi-Fi parameters in `Resources` by **removing** this variable
+      ```java
+      /**
+       * The location of the target bin.
+       */
+      public static Point bin = new Point(get("BIN_x"), get("BIN_y"));
+      ```
+      and replacing it with
+      ```java
+      /**
+       * The location of the red target bin.
+       */
+      public static Point redBin = new Point(get("Red_BIN_x"), get("Red_BIN_y"));
+
+      /**
+       * The location of the green target bin.
+       */
+      public static Point greenBin = new Point(get("Green_BIN_x"), get("Green_BIN_y"));
+      ```
+  2. Change your program logic to use `redBin` and `greenBin` instead of `bin`.
 
 ## Useful Information
 - The WiFi test code uses `System.out.println()` statements that print to both the screen
