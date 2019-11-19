@@ -48,11 +48,11 @@ public class WifiExample {
     System.out.println("Island Zone, upper right: " + island.ur);
     System.out.println("Red tunnel footprint, lower left y value: " + tnr.ll.y);
 
-    // Example 3: Compare value;
-    if (bin.x < 5) {
-      System.out.println("Bin location X < 5");
+    // Example 3: Compare value
+    if (redBin.x < 5) {
+      System.out.println("Red bin location X < 5");
     } else {
-      System.out.println("Bin location X >= 5");
+      System.out.println("Red bin location X >= 5");
     }
 
     // Wait until user decides to end program
