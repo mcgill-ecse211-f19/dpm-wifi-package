@@ -5,7 +5,7 @@
 **Note:** The latest version of this document can always be found at [github.com/mcgill-ecse211-f19/dpm-wifi-package/blob/master/README.md](https://github.com/mcgill-ecse211-f19/dpm-wifi-package/blob/master/README.md).
 
 **Update Nov. 18:** To be consistent with the project specification,
-the `bin` parameter has been replaced with `redBin` and `greenBin` parameters. See [below](#useful-information) for details.
+the `bin` parameter has been replaced with `redBin` and `greenBin` parameters. You therefore need to make a few changes. See [below](#useful-information) for details.
 
 ## Overview
 
@@ -136,9 +136,13 @@ you can bypass this by changing this line (in `Resources`):
   public static double targetAngle = Math.max(get("TNR_LL_x"), get("TNR_UR_x"));
   ```
   Do this only for the beta demo, and remember to change it back afterwards.
-- For the final competition, you should change your code to receive
+- **For the final competition**, you must change your code to receive
 `redBin` and `greenBin` parameters instead of `bin`. To do that:
-  1. Update the Wi-Fi parameters in `Resources` by **removing** this variable
+  1. Update the Server XML layout description file ([`layout.xml`](Server/layout.xml))
+  and the example file ([`example_data_fill.xml`](Server/example_data_fill.xml))
+  by pulling from this repo or redownloading the latest version from MyCourses.
+  If you had any custom XML layout data files, update them to include the two bins.
+  2. Update the Wi-Fi parameters in `Resources` by **removing** this variable
       ```java
       /**
        * The location of the target bin.
@@ -157,7 +161,9 @@ you can bypass this by changing this line (in `Resources`):
        */
       public static Point greenBin = new Point(get("Green_BIN_x"), get("Green_BIN_y"));
       ```
-  2. Change your program logic to use `redBin` and `greenBin` instead of `bin`.
+  3. Change your program logic to use `redBin` and `greenBin` instead of `bin`.
+
+  :pencil: Please use the new XML layout with the Competition Map website. The old layout with one bin is no longer supported.
 
 ## Useful Information
 - The WiFi test code uses `System.out.println()` statements that print to both the screen
